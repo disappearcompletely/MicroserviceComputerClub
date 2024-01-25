@@ -12,7 +12,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 is_db_initialized = False
-#zxc
+#zxc#zxc
 @app.before_request
 def create_tables():
     global is_db_initialized
