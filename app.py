@@ -1,5 +1,5 @@
 from flask import Flask
-from flask import request, jsonify
+from flask import request, jsonify, render_template
 from models import db, MenuItem, Order, Reservation
 from datetime import datetime
 from prometheus_flask_exporter import PrometheusMetrics
@@ -12,7 +12,11 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
 is_db_initialized = False
-#zxc#zxc
+
+@app.route('/')
+def home():
+    return render_template('index.html')
+
 @app.before_request
 def create_tables():
     global is_db_initialized
