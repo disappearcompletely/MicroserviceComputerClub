@@ -1,11 +1,25 @@
 version: '3.8'
 services:
-  app:
-    build: .
+  menu_service:
+    build:
+      context: .
+      dockerfile: Dockerfile_menu_service
     ports:
       - "5002:5002"
     volumes:
-      - db_volume:/app
+      - C:/Users/Dmitriy/Desktop/prac6:/data
+    depends_on:
+      - prometheus
+      - grafana
+
+  reservation_service:
+    build:
+      context: .
+      dockerfile: Dockerfile_reservation_service
+    ports:
+      - "5003:5003"
+    volumes:
+      - C:/Users/Dmitriy/Desktop/prac6:/data
     depends_on:
       - prometheus
       - grafana
