@@ -62,7 +62,6 @@ def cancel_reservation(reservation_id):
 @app.route('/notify', methods=['POST'])
 def notify():
     data = request.json
-    # Просто логируем полученное уведомление
     print("Получено уведомление: ", data)
     return jsonify({"message": "Уведомление получено"}), 200
 
