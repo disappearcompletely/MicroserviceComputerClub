@@ -23,5 +23,15 @@ jobs:
     - name: Build and push Docker image
       uses: docker/build-push-action@v2
       with:
+        context:
+        file: ./Dockerfile_menu_service
+        push: true
+        tags: threehunna/microservicecomputerclub:latest
+
+    - name: Build and push reservation_service Docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        file: ./Dockerfile_reservation_service
         push: true
         tags: threehunna/microservicecomputerclub:latest
