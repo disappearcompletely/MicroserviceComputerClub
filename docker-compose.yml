@@ -1,14 +1,27 @@
 version: '3.8'
 services:
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_DB: club
+      POSTGRES_USER: dmitriy
+      POSTGRES_PASSWORD: 321123
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
   menu_service:
     build:
       context: .
       dockerfile: Dockerfile_menu_service
     ports:
       - "5002:5002"
-    volumes:
-      - C:/Users/Dmitriy/Desktop/prac6:/data
+    environment:
+      - DATABASE_URL=postgresql://dmitriy:321123@db/club
     depends_on:
+      - db
       - prometheus
       - grafana
 
@@ -18,9 +31,10 @@ services:
       dockerfile: Dockerfile_reservation_service
     ports:
       - "5003:5003"
-    volumes:
-      - C:/Users/Dmitriy/Desktop/prac6:/data
+    environment:
+      - DATABASE_URL=postgresql://dmitriy:321123@db/club
     depends_on:
+      - db
       - prometheus
       - grafana
 
@@ -63,4 +77,4 @@ services:
     command: -config.file=/etc/promtail/config.yml
 
 volumes:
-  db_volume:
+  postgres_data:
